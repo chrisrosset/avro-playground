@@ -24,6 +24,7 @@ SCHEMA = {
 # according to the Avro specification document. We need this to correctly
 # encode the block length and the object size.
 # https://avro.apache.org/docs/1.12.0/specification/#binary-encoding
+# You are not expected to understand this.
 
 def zigzag_encode(n: int) -> int:
     """ZigZag encodes a signed integer into an unsigned integer."""
