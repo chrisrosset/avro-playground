@@ -120,6 +120,15 @@ def write(name):
             # Spec: The file’s 16-byte sync marker.
             out.write(marker)
 
+    with open(f"{name}.priv.avro", 'wb') as out:
+        # This is the private Writer API inside of fastavro.
+        # The next line will write the header (including the schema).
+        w = fastavro._write.Writer(out, schema, sync_interval = 1, sync_marker = marker)
+
+        # The loop simulates the appending. Each run adds stuff at the end of the file.
+        for rec in records:
+            # `write` will write the new block including the metadata.
+            w.write(rec)
 
 def read(name):
     with open(name, 'rb') as strm:
